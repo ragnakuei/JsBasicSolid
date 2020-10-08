@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"
+      dir="ltr">
+<head>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th scope="col">項次</th>
+        <th scope="col">廠商名稱</th>
+        <th scope="col">負責人</th>
+        <th scope="col">聯絡電話</th>
+    </tr>
+    </thead>
+    <tbody id="vendorList">
+    <tr>
+        <td>1</td>
+        <td>廠商A</td>
+        <td>負責人A</td>
+        <td>聯絡電話A</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>廠商B</td>
+        <td>負責人B</td>
+        <td>聯絡電話B</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>廠商C</td>
+        <td>負責人C</td>
+        <td>聯絡電話C</td>
+    </tr>
+    </tbody>
+</table>
+<button id="fetchNextPageListDataBtn">取得下一頁資料</button>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./ListData.js"></script>
+<script>
+    // 差異部份於各頁面自行實作
+    ListData.GetNextPageListData = function (e) {
+        // 假設資料從 ajax 取回來，實際上 jQuery 會以 callback 的方式來呼叫
+        return '<tr> <td>4</td> <td>廠商D</td> <td>負責人D</td> <td>聯絡電話D</td> </tr> <tr> <td>5</td> <td>廠商E</td> <td>負責人E</td> <td>聯絡電話E</td> </tr> <tr> <td>6</td> <td>廠商F</td> <td>負責人F</td> <td>聯絡電話F</td> </tr>';
+    }
+
+    window.onload = function () {
+        $('#fetchNextPageListDataBtn').click(function (e) {
+            var nextPageListData = ListData.GetNextPageListData();
+            $('#vendorList').html(nextPageListData);
+
+            ListData.RegisterListDataColumnEvents($('#vendorList'));
+        });
+
+        ListData.RegisterListDataColumnEvents($('#vendorList'));
+    }
+</script>
+</body>
+</html>
